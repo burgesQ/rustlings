@@ -1,39 +1,44 @@
-fn main() {
-    // You can optionally experiment here.
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn simple_option() {
-        let target = "rustlings";
-        let optional_target = Some(target);
-
-        // TODO: Make this an if-let statement whose value is `Some`.
-        word = optional_target {
-            assert_eq!(word, target);
-        }
+    fn main() {
+        // You can optionally experiment here.
     }
 
-    #[test]
-    fn layered_option() {
-        let range = 10;
-        let mut optional_integers: Vec<Option<i8>> = vec![None];
+    #[cfg(test)]
+    mod tests {
+        // use std::option;
+        #[test]
+        fn simple_option() {
+            let target = "rustlings";
+            let optional_target = Some(target);
 
-        for i in 1..=range {
-            optional_integers.push(Some(i));
+            // TODO: Make this an if-let statement whose value is `Some`.
+            if let Some(word) = optional_target {
+                assert_eq!(word, target);
+            }
         }
 
-        let mut cursor = range;
+        #[test]
+        fn layered_option() {
+            let range = 10;
+            let mut optional_integers: Vec<Option<i8>> = vec![None];
 
-        // TODO: Make this a while-let statement. Remember that `Vec::pop()`
-        // adds another layer of `Option`. You can do nested pattern matching
-        // in if-let and while-let statements.
-        integer = optional_integers.pop() {
-            assert_eq!(integer, cursor);
-            cursor -= 1;
+            for i in 1..=range {
+                optional_integers.push(Some(i));
+            }
+
+            let mut cursor = range;
+
+            // TODO: Make this a while-let statement. Remember that `Vec::pop()`
+            // adds another layer of `Option`. You can do nested pattern matching
+            // in if-let and while-let statements.
+            while let Some(value) = optional_integers.pop() {
+                if let Some(integer) = value {
+                    assert_eq!(integer, cursor);
+                    cursor -= 1;
+                }
+            }
+
+            // NOTE while let Some(Some(interger)) in solution
+
+            assert_eq!(cursor, 0);
         }
-
-        assert_eq!(cursor, 0);
     }
-}
